@@ -1,0 +1,51 @@
+LARAVEL E-COMMERCE STRUCTURE
+
+1) User Model
+
+Model Name: User Migration File:
+2014_10_12_000000_create_users_table.php
+
+Description: Represents the application users. Fields: - id (bigint,
+primary key) - name (string) - email (string, unique) - timestamps
+
+Relationships: - Has one Cart - Has many Orders
+
+2) Product Model
+
+Model Name: Product Migration File: xxxx_xx_xx_create_products_table.php
+
+Description: Represents products available for purchase. Fields: - id
+(bigint, primary key) - name (string) - price (decimal 10,2) -
+timestamps
+
+Relationships: - Has many OrderItems
+
+3) Cart Model
+
+Model Name: Cart Migration File: xxxx_xx_xx_create_carts_table.php
+
+Description: Represents a user’s shopping cart. Fields: - id (bigint,
+primary key) - user_id (foreign key) - total (decimal 10,2) - timestamps
+
+Relationships: - Belongs to User
+
+4) Order Model
+
+Model Name: Order Migration File: xxxx_xx_xx_create_orders_table.php
+
+Description: Represents a completed or pending purchase order. Fields: -
+id (bigint, primary key) - user_id (foreign key) - total (decimal
+10,2) - status (string) - timestamps
+
+Relationships: - Belongs to User - Has many OrderItems
+
+5) OrderItem Model
+
+Model Name: OrderItem Migration File:
+xxxx_xx_xx_create_order_items_table.php
+
+Description: Represents individual items inside an order. Fields: - id
+(bigint, primary key) - order_id (foreign key) - product_id (foreign
+key) - quantity (integer) - price (decimal 10,2) - timestamps
+
+Relationships: - Belongs to Order - Belongs to Product
