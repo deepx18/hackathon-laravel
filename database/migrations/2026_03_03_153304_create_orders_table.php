@@ -18,9 +18,8 @@ return new class extends Migration
               ->onDelete('cascade');
 
         $table->decimal('total', 10, 2);
-        $table->string('status')->default('pending');
-        $table->timestamp('created_at')->useCurrent();
-        $table->timestamp('updated_at')->nullable();
+        $table->enum('status', ['pending', 'shipped', 'delivered'])->default('pending');
+        $table->timestamps();
     });
 }
 

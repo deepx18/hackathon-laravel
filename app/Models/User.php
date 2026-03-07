@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,13 +48,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-     public function cart()
+
+    public function cart(): HasOne
     {
         return $this->hasOne(Cart::class);
     }
 
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // Helper used by RoleMiddleware and Blade views
+    public function hasRole(string $role): bool
+    {
+        return $this->roles->pluck('name')->contains($role);
     }
 }
