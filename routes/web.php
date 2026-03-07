@@ -9,7 +9,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\AdminOrderController;
 
-// ── Public ────────────────────────────────────────────────────────────────────
 Route::get ('/',         [MainController::class, 'index'])->name('main.index');
 Route::get ('/products', [ProductController::class, 'index'])->name('products');
 Route::get ('/login',    [LoginController::class,    'showForm'])->name('login');
@@ -18,7 +17,7 @@ Route::get ('/register', [RegisterController::class, 'showForm'])->name('registe
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/logout',   [LoginController::class,    'logout'])->name('logout');
 
-// ── Client ────────────────────────────────────────────────────────────────────
+
 Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get   ('/cart',           [CartController::class,  'index'])->name('cart.index');
     Route::post  ('/cart/add',       [CartController::class,  'add'])->name('cart.add');
@@ -29,7 +28,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
     Route::get   ('/orders/{order}', [OrderController::class, 'show'])->name('order.show');
 });
 
-// ── Admin ─────────────────────────────────────────────────────────────────────
+
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
